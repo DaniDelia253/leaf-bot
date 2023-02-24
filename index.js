@@ -10,7 +10,7 @@ const client = new Client({
 });
 
 client.on("ready", () => {
-	console.log("Bot is ready! :)");
+	console.log("Bot is ready to go!! :)");
 });
 
 client.on("messageCreate", (message) => {
