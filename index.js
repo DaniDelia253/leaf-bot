@@ -29,13 +29,15 @@ client.on("messageCreate", (message) => {
 		//then i want it to react with a random emoji from a list
 		const list = [
 			//~~place "emoji number", "emoji number", "emoji number", here 
-			//todofix number limit
-			"966108946953818172",
-			"941776068669472849",
-			"1078906441387229294",
-			"1025919089379659776"
+			//todo fix number limit
+			// "966108946953818172",
+			// "941776068669472849",
+			// "1078906441387229294",
+			// "1025919089379659776"
+			"🤍",
+			"🥳"
 		];
-		const number = Math.floor(Math.random() * 4);
+		const number = Math.floor(Math.random() * 2);
 		message.react(list[number]);
 	}
 });
