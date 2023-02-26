@@ -23,10 +23,20 @@ client.on("ready", () => {
 
 //look at every single message on the server...
 client.on("messageCreate", (message) => {
-	//...and if 'twiggy' is in any of them.....
-	if (/[tT]+[wW]+[iI]+[gG]+[yY]/.test(message.content)) {
-		//react with bebytwiggy :)
-		message.react("1078508965098422417");
+	if (
+		message.author.username === "Arcane" && message.content.includes("has reached level")
+	) {
+		//then i want it to react with a random emoji from a list
+		const list = [
+			//~~place "emoji number", "emoji number", "emoji number", here 
+			//todofix number limit
+			"966108946953818172",
+			"941776068669472849",
+			"1078906441387229294",
+			"1025919089379659776"
+		];
+		const number = Math.floor(Math.random() * 4);
+		message.react(list[number]);
 	}
 });
 
