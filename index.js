@@ -24,32 +24,37 @@ client.on("ready", () => {
 //look at every single message on the server...
 client.on("messageCreate", (message) => {
 	if (
-		message.author.username === "Arcane" && message.content.includes("has reached level")
+		message.author.username === "Arcane" &&
+		message.content.includes("has reached level")
 	) {
 		//then i want it to react with a random emoji from a list
-		if (message.guild.name === "server"){
-			const list = [
-			"1078506917812506624",
-			"1079448316321992715",
-			"1079448313385996338",
-			"1079448310982651975",
-			"1079448308604485743",
-			"1078508965098422417",
-			"1079463337617797260",
-			"1079463626957664327",
-			"1079464077442699355",
-			"1079462912025952386",
-		];
-		const amount = 10
-		}
-		else if (message.guild.id === "938105437180551168"){
-			const list = [
+
+		//first... establish the 2 variables:
+		let list = [];
+		let amount = 0;
+
+		if (message.guild.name === "server") {
+			list = [
+				"1078506917812506624",
+				"1079448316321992715",
+				"1079448313385996338",
+				"1079448310982651975",
+				"1079448308604485743",
+				"1078508965098422417",
+				"1079463337617797260",
+				"1079463626957664327",
+				"1079464077442699355",
+				"1079462912025952386",
+			];
+			amount = 10;
+		} else if (message.guild.id === "938105437180551168") {
+			list = [
 				"966108946953818172",
 				"941776068669472849",
 				"1078906441387229294",
-				"1025919089379659776"
+				"1025919089379659776",
 			];
-		const amount = 4
+			amount = 4;
 		}
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
