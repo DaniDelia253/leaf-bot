@@ -72,16 +72,16 @@ client.on("messageCreate", (message) => {
 	}
 });
 client.on("messageReactionAdd",async (reaction) =>{
-		let reactionid = ""
-		if (message.guild.name === "server") {
-			reactionid = "1079573401888358510";
+		let id = "";
+				if (message.guild.name === "server") {
+			id = "1079573401888358510";
 		} else if (message.guild.id === "938105437180551168") {
-			reactionid = "1079573678515298344";
+			id = "1079573678515298344";
 		}
-		if (reaction._emoji.id === reactionid){
+		if (reaction._emoji.id === id){
 			const channel = await client.channels.fetch(reaction.message.channelId)
 			channel.messages.fetch(reaction.message.id).then(msg=>{
-				msg.react(reactionid)
+				msg.react(id)
 			})
 		}
 	})
