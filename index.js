@@ -54,6 +54,9 @@ client.on("messageCreate", (message) => {
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
 	}
+	if (message.content.includes("Leaf") || message.content.includes ("leaf")){
+		message.react("1079573678515298344")
+	}
 });
 
 client.login(process.env.TOKEN);
