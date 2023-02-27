@@ -10,6 +10,7 @@ const client = new Client({
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMessageReactions,
 		//with these three, I can gain access to text in messages
 		//if i wanted info about reactions, I would have to specify that here!!
 		//if something isn't working, most likely the right info is not included here!
@@ -69,6 +70,10 @@ client.on("messageCreate", (message) => {
 		}
 		message.react(id)
 	}
+	client.on("messageReactionAdd",(reaction) =>{
+		// if (reaction === )
+		console.log(reaction)
+	})
 });
 
 client.login(process.env.TOKEN);
