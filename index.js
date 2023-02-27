@@ -72,18 +72,26 @@ client.on("messageCreate", (message) => {
 	}
 });
 client.on("messageReactionAdd",async (reaction) =>{
-		let id = "";
-				if (message.guild.name === "server") {
-			id = "1079573401888358510";
-		} else if (message.guild.id === "938105437180551168") {
-			id = "1079573678515298344";
-		}
-		if (reaction._emoji.id === id){
+		// if (reaction === )
+		//this is for Server
+		if (reaction._emoji.id === "1079573401888358510"){
+			// message.react("1079573401888358510")
 			const channel = await client.channels.fetch(reaction.message.channelId)
 			channel.messages.fetch(reaction.message.id).then(msg=>{
-				msg.react(id)
+				msg.react("1079573401888358510")
 			})
 		}
 	})
+client.on("messageReactionAdd",async (reaction) =>{
+		// if (reaction === )
+		//this is for NVO
+		if (reaction._emoji.id === "1079573678515298344"){
+			// message.react("1079573401888358510")
+			const channel = await client.channels.fetch(reaction.message.channelId)
+			channel.messages.fetch(reaction.message.id).then(msg=>{
+				msg.react("1079573678515298344")
+			})
+		}
+})
 
 client.login(process.env.TOKEN);
