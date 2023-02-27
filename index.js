@@ -70,10 +70,22 @@ client.on("messageCreate", (message) => {
 		}
 		message.react(id)
 	}
-	client.on("messageReactionAdd",(reaction) =>{
-		// if (reaction === )
-		console.log(reaction)
-	})
 });
+client.on("messageReactionAdd",async (reaction) =>{
+		// if (reaction === )
+		//todo CHANGE THIS TO NVO'S ID !!!
+		const reactionid = ""
+						if (message.guild.name === "server") {
+			reactionid = "1079573401888358510";
+		} else if (message.guild.id === "938105437180551168") {
+			reactionid = "1079573678515298344";
+		}
+		if (reaction._emoji.id === reactionid){
+			const channel = await client.channels.fetch(reaction.message.channelId)
+			channel.messages.fetch(reaction.message.id).then(msg=>{
+				msg.react(reactionid)
+			})
+		}
+	})
 
 client.login(process.env.TOKEN);
