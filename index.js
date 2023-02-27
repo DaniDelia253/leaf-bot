@@ -61,29 +61,28 @@ client.on("messageCreate", (message) => {
 		message.react(list[number]);
 	}
 	//this section is for leaf reacting to leaf. (1079573401888358510 serverleaf) and (1079573678515298344 for NVO/akaServerID#938105437180551168)
-	if (message.content.includes("Leaf") || message.content.includes ("leaf")){
+	if (message.content.includes("Leaf") || message.content.includes("leaf")) {
 		let id = "";
-				if (message.guild.name === "server") {
+		if (message.guild.name === "server") {
 			id = "1079573401888358510";
 		} else if (message.guild.id === "938105437180551168") {
 			id = "1079573678515298344";
 		}
-		message.react(id)
+		message.react(id);
 	}
 });
-client.on("messageReactionAdd",async (reaction) =>{
-		let id = "";
-				if (message.guild.name === "server") {
-			id = "1079573401888358510";
-		} else if (message.guild.id === "938105437180551168") {
-			id = "1079573678515298344";
-		}
-		if (reaction._emoji.id === id){
-			const channel = await client.channels.fetch(reaction.message.channelId)
-			channel.messages.fetch(reaction.message.id).then(msg=>{
-				msg.react(id)
-			})
-		}
-	})
+client.on("messageReactionAdd", async (reaction) => {
+	let id = "";
+	if (message.guild.name === "server") {
+		id = "1079573401888358510";
+	} else if (message.guild.id === "938105437180551168") {
+		id = "1079573678515298344";
+	}
+	if (reaction._emoji.id === id) {
+		const channel = await client.channels.fetch(reaction.message.channelId);
+		const message = await channel.messages.fetch(reaction.message.id);
+		message.react(id);
+	}
+});
 
 client.login(process.env.TOKEN);
