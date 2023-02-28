@@ -50,12 +50,34 @@ client.on("messageCreate", (message) => {
 			amount = 10;
 		} else if (message.guild.id === "938105437180551168") {
 			list = [
+				// memelove2:
 				"966108946953818172",
+				// cat_cheer:
 				"941776068669472849",
+				// chaoticskykid:
 				"1078906441387229294",
+				// lazybun_hearteyes:
 				"1025919089379659776",
+				// Mothlove:
+				"1048060379735019560",
+				//anime_Heart:
+				"939377626026508298",
+				//anime_peek:
+				"939373652871372800",
+				//bearywow:
+				"939389586717696080",
+				//emoji_Loved:
+				"939363246924783676",
+				//heart_orange:
+				"941616320066228234",
+				//memelove:
+				"966108689452920883",
+				//shibehearteyes:
+				"939392400181329920",
+				//shibelove:
+				"939392116612821002",
 			];
-			amount = 4;
+			amount = 13;
 		}
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
