@@ -26,6 +26,7 @@ const client = new Client({
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildMessageReactions,
+		GatewayIntentBits.GuildMembers,
 		//with these three, I can gain access to text in messages
 		//if i wanted info about reactions, I would have to specify that here!!
 		//if something isn't working, most likely the right info is not included here!
@@ -125,6 +126,7 @@ client.on("messageCreate", (message) => {
 			.send({ embeds: [embedMessage] });
 	}
 });
+
 //the following code makes leaf stack his own emoji on any leafemoji
 client.on("messageReactionAdd", async (reaction) => {
 	if (
