@@ -110,7 +110,7 @@ client.on("messageCreate", (message) => {
 	const embedMessage = {
 		type: "rich",
 		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} \n\n﹒grab some ${ChannelTags.NVOroles}\n\n﹒come chat in ${ChannelTags.NVOanythingGoes}!\n‎`,
+		description: `Welcome <@876850436953481277> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us here in ${ChannelTags.NVOanythingGoes}!\n‎`,
 		color: 0xedb2aa,
 		image: {
 			url: `https://i.imgur.com/7m2LO4M.png`,
@@ -148,9 +148,7 @@ client.on("guildMemberAdd", async (member) => {
 	const embedMessage = {
 		type: "rich",
 		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} \n\n﹒grab some ${ChannelTags.NVOroles}\n\n﹒come chat in ${ChannelTags.NVOanythingGoes}!\n‎`,
-		//      "description": `Welcome MEMBER to NVO,  it's lovely to have you here!\n‎\n﹒verify our #rules \n\n﹒grab some #roles\n\n﹒come chat in #anything_goes\n‎`,
-
+		description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us in ${ChannelTags.NVOanythingGoes}!\n‎`,
 		color: 0xedb2aa,
 		image: {
 			url: `https://i.imgur.com/7m2LO4M.png`,
