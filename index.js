@@ -16,8 +16,6 @@ const ChannelTags = {
 	NVOanythingGoes: "<#938105437180551172>",
 };
 
-let newlyJoinedMemberId = "876850436953481277";
-
 //client obj represents the entire bot:
 
 const client = new Client({
@@ -112,7 +110,7 @@ client.on("messageCreate", (message) => {
 	const embedMessage = {
 		type: "rich",
 		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${newlyJoinedMemberId}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us here in ${ChannelTags.NVOanythingGoes}!\n‎`,
+		description: `Welcome <@876850436953481277> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us here in ${ChannelTags.NVOanythingGoes}!\n‎`,
 		color: 0xedb2aa,
 		image: {
 			url: `https://i.imgur.com/7m2LO4M.png`,
@@ -146,12 +144,11 @@ client.on("messageReactionAdd", async (reaction) => {
 //welcome messagre for when new members join in:
 client.on("guildMemberAdd", async (member) => {
 	//when a new member joins happens, get their id and establish all variables we need:
-	newlyJoinedMemberId = member.user.id;
 	//create the embed to send:
 	const embedMessage = {
 		type: "rich",
 		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${newlyJoinedMemberId}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us in ${ChannelTags.NVOanythingGoes}!\n‎`,
+		description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us in ${ChannelTags.NVOanythingGoes}!\n‎`,
 		color: 0xedb2aa,
 		image: {
 			url: `https://i.imgur.com/7m2LO4M.png`,
