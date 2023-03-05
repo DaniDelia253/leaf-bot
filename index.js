@@ -165,11 +165,11 @@ client.on("guildMemberAdd", async (member) => {
 		DaniDeliaGeneral: "1078490033037770805",
 	};
 	let whereToSend;
-	if (member.guild.id === GuildIDs.DaniDeliaServer) {
+	if (member.Guild.id === GuildIDs.DaniDeliaServer) {
 		whereToSend = ChannelIDs.DaniDeliaGeneral;
-	} else if (member.guild.id === GuildIDs.Server) {
+	} else if (member.Guild.id === GuildIDs.Server) {
 		whereToSend = ChannelIDs.ServerGeneral;
-	} else if (member.guild.id === GuildIDs.NVO) {
+	} else if (member.Guild.id === GuildIDs.NVO) {
 		whereToSend = ChannelIDs.NVOwelcome;
 	}
 	client.channels.cache.get(whereToSend).send({ embeds: [embedMessage] });
