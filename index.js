@@ -107,22 +107,22 @@ client.on("messageCreate", (message) => {
 		message.react(id);
 	}
 
-	const embedMessage = {
-		type: "rich",
-		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} \n\n﹒grab some ${ChannelTags.NVOroles}\n\n﹒come chat in ${ChannelTags.NVOanythingGoes}!\n‎`,
-		color: 0xedb2aa,
-		image: {
-			url: `https://i.imgur.com/7m2LO4M.png`,
-			height: 0,
-			width: 0,
-		},
-	};
-	if (message.content.includes("test the welcome message embed")) {
-		client.channels.cache
-			.get("962146899220131860")
-			.send({ embeds: [embedMessage] });
-	}
+	// const embedMessage = {
+	// 	type: "rich",
+	// 	title: `✿﹒welcome  ﹒✿`,
+	// 	description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} \n\n﹒grab some ${ChannelTags.NVOroles}\n\n﹒come chat in ${ChannelTags.NVOanythingGoes}!\n‎`,
+	// 	color: 0xedb2aa,
+	// 	image: {
+	// 		url: `https://i.imgur.com/7m2LO4M.png`,
+	// 		height: 0,
+	// 		width: 0,
+	// 	},
+	// };
+	// if (message.content.includes("test the welcome message embed")) {
+	// 	client.channels.cache
+	// 		.get("962146899220131860")
+	// 		.send({ embeds: [embedMessage] });
+	// }
 });
 
 //the following code makes leaf stack his own emoji on any leafemoji
