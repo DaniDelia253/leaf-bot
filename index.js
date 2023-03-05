@@ -149,7 +149,7 @@ client.on("guildMemberAdd", async (member) => {
 	const embedMessage = {
 		type: "rich",
 		title: `✿﹒welcome  ﹒✿`,
-		description: `Welcome <@${newlyJoinedMemberId}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us here in ${ChannelTags.NVOanythingGoes}!\n‎`,
+		description: `Welcome <@${newlyJoinedMemberId}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} & grab some ${ChannelTags.NVOroles}\n\n﹒then come hang out with us in ${ChannelTags.NVOanythingGoes}!\n‎`,
 		color: 0xedb2aa,
 		image: {
 			url: `https://i.imgur.com/7m2LO4M.png`,
@@ -165,11 +165,11 @@ client.on("guildMemberAdd", async (member) => {
 		DaniDeliaGeneral: "1078490033037770805",
 	};
 	let whereToSend;
-	if (member.Guild.id === GuildIDs.DaniDeliaServer) {
+	if (member.guild.id === GuildIDs.DaniDeliaServer) {
 		whereToSend = ChannelIDs.DaniDeliaGeneral;
-	} else if (member.Guild.id === GuildIDs.Server) {
+	} else if (member.guild.id === GuildIDs.Server) {
 		whereToSend = ChannelIDs.ServerGeneral;
-	} else if (member.Guild.id === GuildIDs.NVO) {
+	} else if (member.guild.id === GuildIDs.NVO) {
 		whereToSend = ChannelIDs.NVOwelcome;
 	}
 	client.channels.cache.get(whereToSend).send({ embeds: [embedMessage] });
