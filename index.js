@@ -116,7 +116,7 @@ client.on("messageCreate", (message) => {
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
 	}
-	if (message.channelId === ChannelIDs.NVOtestTestTesting) {
+	if (message.channelId === ChannelIDs.NVOSuggestions) {
 		//if a message is sent in this channel then react with YES and NO emoji.
 		message.react(EmojiIDs.NVObearyyes);
 		message.react(EmojiIDs.NVObearyno);
