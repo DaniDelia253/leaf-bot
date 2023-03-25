@@ -29,6 +29,13 @@ const LeafEmojiIds = {
 	NVOLeaf: "1079573678515298344",
 };
 
+const EmojiIDs = {
+	NVObearyyes: "941618386897612841",
+	NVObearyno: "939389511677386792",
+	serveryescat: "1089295703689416834",
+	servernocat: "1089296461415596153",
+};
+
 //client obj represents the entire bot:
 
 const client = new Client({
@@ -108,6 +115,11 @@ client.on("messageCreate", (message) => {
 		}
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
+	}
+	if (message.channelId === ChannelIDs.NVOtestTestTesting) {
+		//if a message is sent in this channel then react with YES and NO emoji.
+		message.react(EmojiIDs.NVObearyyes);
+		message.react(EmojiIDs.NVObearyno);
 	}
 	//this section is for leaf reacting to someone saying "leaf" in their message.
 	if (/\b[lL]+[eE]+[aA]+[fF]+\b/.test(message.content)) {
