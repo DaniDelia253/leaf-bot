@@ -16,6 +16,11 @@ const ChannelTags = {
 	NVOanythingGoes: "<#938105437180551172>",
 };
 
+const LeafEmojiIds = {
+	serverLeaf: "1079573401888358510",
+	NVOLeaf: "1079573678515298344",
+};
+
 //client obj represents the entire bot:
 
 const client = new Client({
@@ -96,33 +101,15 @@ client.on("messageCreate", (message) => {
 		const number = Math.floor(Math.random() * amount);
 		message.react(list[number]);
 	}
-	//this section is for leaf reacting to someone saying "leaf" in their message. (1079573401888358510 serverleaf) and (1079573678515298344 for NVO/akaServerID#938105437180551168)
-	if (message.content.includes("Leaf") || message.content.includes("leaf")) {
-		let id = "";
-		if (message.guild.name === "server") {
-			id = "1079573401888358510";
-		} else if (message.guild.id === "938105437180551168") {
-			id = "1079573678515298344";
+	//this section is for leaf reacting to someone saying "leaf" in their message.
+	if (/\b[lL]+[eE]+[aA]+[fF]+\b/.test(message.content)) {
+		//check whether I/m in server or NVO and react with the right emoji
+		if ((message.guildId = GuildIDs.Server)) {
+			message.react(LeafEmojiIds.serverLeaf);
+		} else if ((message.guildId = GuildIDs.NVO)) {
+			message.react(LeafEmojiIds.NVOLeaf);
 		}
-		message.react(id);
 	}
-
-	// const embedMessage = {
-	// 	type: "rich",
-	// 	title: `✿﹒welcome  ﹒✿`,
-	// 	description: `Welcome <@${member.user.id}> to NVO,  it's lovely to have you here!\n‎\n﹒verify our ${ChannelTags.NVOrules} \n\n﹒grab some ${ChannelTags.NVOroles}\n\n﹒come chat in ${ChannelTags.NVOanythingGoes}!\n‎`,
-	// 	color: 0xedb2aa,
-	// 	image: {
-	// 		url: `https://i.imgur.com/7m2LO4M.png`,
-	// 		height: 0,
-	// 		width: 0,
-	// 	},
-	// };
-	// if (message.content.includes("test the welcome message embed")) {
-	// 	client.channels.cache
-	// 		.get("962146899220131860")
-	// 		.send({ embeds: [embedMessage] });
-	// }
 });
 
 //the following code makes leaf stack his own emoji on any leafemoji
