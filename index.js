@@ -20,7 +20,10 @@ const ChannelIDs = {
 	NVOwelcome: "1081977778829795338",
 	NVOtestTestTesting: "962146899220131860",
 	NVOSuggestions: "1042496838005174292",
+	NVOHeyIPlanted: "939973859795431445",
 	ServerGeneral: "1048059530711404618",
+	ServerYesNo: "1089293622337359993",
+	ServerDizzyPlant: "1089311289031000130",
 	DaniDeliaGeneral: "1078490033037770805",
 };
 
@@ -34,7 +37,19 @@ const EmojiIDs = {
 	NVObearyno: "939389511677386792",
 	serveryescat: "1089295703689416834",
 	servernocat: "1089296461415596153",
+	dizzy: "💫",
 };
+
+const plantedAtPhrases = [
+	"planted at",
+	"planted in",
+	"plant at",
+	"Planted at",
+	"Planted in",
+	"Plant at",
+];
+
+//*END of important stuff
 
 //client obj represents the entire bot:
 
@@ -129,6 +144,16 @@ client.on("messageCreate", (message) => {
 		} else if (message.guildId === GuildIDs.NVO) {
 			message.react(LeafEmojiIds.NVOLeaf);
 		}
+	}
+	//if the message is in the channel HeyIPleanted
+	if (message.channelId === ChannelIDs.NVOHeyIPlanted) {
+		//and it includes "planted at/in"
+		plantedAtPhrases.forEach((phrase) => {
+			if (message.content.includes(phrase)) {
+				//then react with the dizzy emoji.
+				message.react(EmojiIDs.dizzy);
+			}
+		});
 	}
 });
 
