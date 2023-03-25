@@ -16,6 +16,14 @@ const ChannelTags = {
 	NVOanythingGoes: "<#938105437180551172>",
 };
 
+const ChannelIDs = {
+	NVOwelcome: "1081977778829795338",
+	NVOtestTestTesting: "962146899220131860",
+	NVOSuggestions: "1042496838005174292",
+	ServerGeneral: "1048059530711404618",
+	DaniDeliaGeneral: "1078490033037770805",
+};
+
 const LeafEmojiIds = {
 	serverLeaf: "1079573401888358510",
 	NVOLeaf: "1079573678515298344",
@@ -104,9 +112,9 @@ client.on("messageCreate", (message) => {
 	//this section is for leaf reacting to someone saying "leaf" in their message.
 	if (/\b[lL]+[eE]+[aA]+[fF]+\b/.test(message.content)) {
 		//check whether I/m in server or NVO and react with the right emoji
-		if ((message.guildId = GuildIDs.Server)) {
+		if (message.guildId === GuildIDs.Server) {
 			message.react(LeafEmojiIds.serverLeaf);
-		} else if ((message.guildId = GuildIDs.NVO)) {
+		} else if (message.guildId === GuildIDs.NVO) {
 			message.react(LeafEmojiIds.NVOLeaf);
 		}
 	}
@@ -145,12 +153,7 @@ client.on("guildMemberAdd", async (member) => {
 		},
 	};
 	//the bot will tag them in a welcome message and mention checking out #rules and #roles! 1078490033037770805
-	const ChannelIDs = {
-		NVOwelcome: "1081977778829795338",
-		NVOtestTestTesting: "962146899220131860",
-		ServerGeneral: "1048059530711404618",
-		DaniDeliaGeneral: "1078490033037770805",
-	};
+
 	let whereToSend;
 	if (member.guild.id === GuildIDs.DaniDeliaServer) {
 		whereToSend = ChannelIDs.DaniDeliaGeneral;
