@@ -1,5 +1,9 @@
-const { Client, GatewayIntentBits } = require("discord.js");
-require("dotenv/config");
+// const { Client, GatewayIntentBits } = require("discord.js");
+// require("dotenv/config");
+import * as dotenv from "dotenv";
+dotenv.config();
+import { Client, REST, Routes, GatewayIntentBits } from "discord.js";
+import fetch from "node-fetch";
 
 //look at the docs for ALLLL issues!!
 
@@ -69,6 +73,94 @@ const client = new Client({
 //to make sure we know when the bot is ready
 client.on("ready", () => {
 	console.log("Bot is ready to go!! :)");
+});
+
+client.on("error", (error) => {
+	console.log("Error!!!");
+	console.log(error);
+});
+
+const commands = [
+	{
+		name: "embed",
+		description:
+			"Enter the channelID and paste the corresponding value for each field in the code.",
+		options: [
+			{
+				type: 3, //3 is string
+				name: "channelid",
+				description:
+					"ChannelID for the channel where you want to send the embed",
+				required: true,
+			},
+			{
+				type: 3, //3 is string
+				name: "title",
+				description: "Title of the embed.",
+				required: true,
+			},
+			{
+				type: 3, //3 is string
+				name: "description",
+				description: "Text for the body of the embed.",
+				required: true,
+			},
+			{
+				type: 3, //3 is string
+				name: "color",
+				description: "Color value.",
+				required: false,
+			},
+			{
+				type: 3, //3 is string
+				name: "imageurl",
+				description: "Color value.",
+				required: false,
+			},
+		],
+	},
+];
+
+client.on("interactionCreate", async (interaction) => {
+	if (!interaction.isChatInputCommand()) return;
+
+	if (interaction.commandName === "embed") {
+		const interactionOptionsArr = interaction.options._hoistedOptions;
+		const title = interactionOptionsArr[1].value;
+		const description = interactionOptionsArr[2].value;
+		let color;
+		if (interactionOptionsArr[3] === undefined) {
+			color = 0xffffff;
+		} else {
+			color = +`0x${interactionOptionsArr[3].value}`;
+		}
+		let imageurl;
+		if (interactionOptionsArr[4] === undefined) {
+			imageurl = "";
+		} else {
+			imageurl = interactionOptionsArr[4].value;
+		}
+		const embedMessage = {
+			type: "rich",
+			title: eval(title),
+			description: eval(description),
+
+			color: color,
+			image: {
+				url: imageurl,
+				height: 0,
+				width: 0,
+			},
+		};
+		client.channels
+			.fetch(interaction.options._hoistedOptions[0].value)
+			.then((channel) => {
+				channel.send({
+					embeds: [embedMessage],
+				});
+			});
+		interaction.reply("✅");
+	}
 });
 
 //look at every single message on the server...
@@ -201,5 +293,21 @@ client.on("guildMemberAdd", async (member) => {
 	}
 	client.channels.cache.get(whereToSend).send({ embeds: [embedMessage] });
 });
+
+const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+
+(async () => {
+	try {
+		console.log("Started refreshing application (/) commands.");
+
+		await rest.put(Routes.applicationCommands(process.env.CLIENTID), {
+			body: commands,
+		});
+
+		console.log("Successfully reloaded application (/) commands.");
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
 client.login(process.env.TOKEN);
