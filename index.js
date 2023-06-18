@@ -52,10 +52,18 @@ const EmojiIDs = {
 const plantedAtPhrases = [
     "planted at",
     "planted in",
+    "planted on",
+    "planted me",
+    "planted a",
     "plant at",
+    "plant @",
     "Planted at",
     "Planted in",
+    "Planted on",
+    "Planted me",
+    "Planted a",
     "Plant at",
+    "Plant @",
 ];
 
 //*END of important stuff
