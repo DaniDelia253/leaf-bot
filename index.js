@@ -22,6 +22,7 @@ const ChannelTags = {
 const UserIDs = {
     NVOInfographicUserId: "939369746133028896",
     NVOLeafUserId: "1078513451099488337",
+    NVOStennyUserId: "876850436953481277",
 };
 const ChannelIDs = {
     NVOwelcome: "1081977778829795338",
@@ -182,8 +183,7 @@ client.on("interactionCreate", async (interaction) => {
 client.on("messageCreate", async (message) => {
     if (
         message.channelId === ChannelIDs.NVOtestTestTesting &&
-        //! ADD THIS BACK IN: message.author.id !== "876850436953481277" (Stenny's userid)
-        //Leafs userID:
+        message.author.id !== UserIDs.NVOStennyUserId &&
         message.author.id !== UserIDs.NVOLeafUserId
     ) {
         const urllist = [];
