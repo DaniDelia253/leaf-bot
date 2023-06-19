@@ -184,7 +184,7 @@ client.on("interactionCreate", async (interaction) => {
 client.on("messageCreate", async (message) => {
     if (
         message.channelId === ChannelIDs.NVOSubmitArt &&
-        //message.author.id !== UserIDs.NVOStennyUserId &&
+        message.author.id !== UserIDs.NVOStennyUserId &&
         message.author.id !== UserIDs.NVOLeafUserId
     ) {
         const urllist = [];
@@ -204,7 +204,7 @@ client.on("messageCreate", async (message) => {
         const tymessage = await tychannel.send(
             "Thank you for submitting! Your message has been received. <:cherryblossomNVO:1081423354118013078>"
         );
-        setTimeout(() => tymessage.delete(), 1000);
+        setTimeout(() => tymessage.delete(), 10000);
     }
 
     if (
