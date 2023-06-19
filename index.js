@@ -33,6 +33,7 @@ const ChannelIDs = {
     NVODailies: "939369464317739028",
     NVONotesChat: "938122836009189427",
     NVOArtSubmissions: "1120143881321857067",
+    NVOSubmitArt: "1118677030796541982",
     ServerGeneral: "1048059530711404618",
     ServerYesNo: "1089293622337359993",
     ServerDizzyPlant: "1089311289031000130",
@@ -182,7 +183,7 @@ client.on("interactionCreate", async (interaction) => {
 //look at every single message on the server...
 client.on("messageCreate", async (message) => {
     if (
-        message.channelId === ChannelIDs.NVOtestTestTesting &&
+        message.channelId === ChannelIDs.NVOSubmitArt &&
         message.author.id !== UserIDs.NVOStennyUserId &&
         message.author.id !== UserIDs.NVOLeafUserId
     ) {
@@ -199,9 +200,7 @@ client.on("messageCreate", async (message) => {
         }
         urllist.forEach((url) => channel.send(url));
         message.delete();
-        const tychannel = await client.channels.fetch(
-            ChannelIDs.NVOtestTestTesting
-        );
+        const tychannel = await client.channels.fetch(ChannelIDs.NVOSubmitArt);
         const tymessage = await tychannel.send(
             "Thank you for submitting! Your message has been received. <:cherryblossomNVO:1081423354118013078>"
         );
