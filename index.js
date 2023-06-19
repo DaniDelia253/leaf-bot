@@ -21,6 +21,7 @@ const ChannelTags = {
 };
 const UserIDs = {
     NVOInfographicUserId: "939369746133028896",
+    NVOLeafUserId: "1078513451099488337",
 };
 const ChannelIDs = {
     NVOwelcome: "1081977778829795338",
@@ -30,6 +31,7 @@ const ChannelIDs = {
     NVOHeyIPlanted: "939973859795431445",
     NVODailies: "939369464317739028",
     NVONotesChat: "938122836009189427",
+    NVOArtSubmissions: "1120143881321857067",
     ServerGeneral: "1048059530711404618",
     ServerYesNo: "1089293622337359993",
     ServerDizzyPlant: "1089311289031000130",
@@ -178,6 +180,34 @@ client.on("interactionCreate", async (interaction) => {
 
 //look at every single message on the server...
 client.on("messageCreate", async (message) => {
+    if (
+        message.channelId === ChannelIDs.NVOtestTestTesting &&
+        //! ADD THIS BACK IN: message.author.id !== "876850436953481277" (Stenny's userid)
+        //Leafs userID:
+        message.author.id !== UserIDs.NVOLeafUserId
+    ) {
+        const urllist = [];
+        Array.from(message.attachments).forEach((attachment) =>
+            urllist.push(attachment[1].url)
+        );
+        const channel = await client.channels.fetch(
+            ChannelIDs.NVOArtSubmissions
+        );
+        channel.send(`<@${message.author.id}> sent:`);
+        if (message.content !== "") {
+            channel.send(message.content);
+        }
+        urllist.forEach((url) => channel.send(url));
+        message.delete();
+        const tychannel = await client.channels.fetch(
+            ChannelIDs.NVOtestTestTesting
+        );
+        const tymessage = await tychannel.send(
+            "Thank you for submitting! Your message has been received. <:cherryblossomNVO:1081423354118013078>"
+        );
+        setTimeout(() => tymessage.delete(), 10000);
+    }
+
     if (
         message.author.username === "Arcane" &&
         message.content.includes("has reached level")
