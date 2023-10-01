@@ -31,6 +31,17 @@ const ChannelIDs = {
 	DaniDeliaGeneral: "1078490033037770805",
 };
 
+const RoleIDs = {
+	NVOGiveAway: "1157115135475843203",
+	NVOBooster: "939280051369824319",
+	NVOButterfly: "1078466652842237962",
+	NVOCrabkin: "1078467087770587236",
+	NVOManta: "1078467326434869318",
+	NVOElder: "1078468135985889385",
+	NVODaddyKrill: "1078467456693190749",
+	NVOFoundersClub: "951579530395516959",
+};
+
 const LeafEmojiIds = {
 	serverLeaf: "1079573401888358510",
 	NVOLeaf: "1079573678515298344",
@@ -72,6 +83,7 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildPresences,
 		//with these three, I can gain access to text in messages
 		//if i wanted info about reactions, I would have to specify that here!!
 		//if something isn't working, most likely the right info is not included here!
@@ -168,6 +180,48 @@ client.on("interactionCreate", async (interaction) => {
 				});
 			});
 		interaction.reply("✅");
+	}
+});
+
+client.on("guildMemberUpdate", async (oldMember, newMember) => {
+	// butterfly or booster role gets added...
+	const listOfRolesToCheck = [RoleIDs.NVOButterfly, RoleIDs.NVOBooster];
+	listOfRolesToCheck.forEach((role) => {
+		if (
+			// if the oldMember DID NOT have the buttefly role
+			!oldMember.roles.cache.has(role) &&
+			// AND the newMember DOES
+			newMember.roles.cache.has(role)
+		) {
+			// giveaway role gets added
+			newMember.roles.add(RoleIDs.NVOGiveAway);
+		}
+	});
+
+	let listOfHigherRoles = [
+		RoleIDs.NVOButterfly,
+		RoleIDs.NVOCrabkin,
+		RoleIDs.NVOManta,
+		RoleIDs.NVOElder,
+		RoleIDs.NVODaddyKrill,
+		RoleIDs.NVOFoundersClub,
+	];
+	// make a bool for whether newMember has any of the higher roles
+	let hasHigherRole = false;
+	listOfHigherRoles.forEach((role) => {
+		if (newMember.roles.cache.has(role)) hasHigherRole = true;
+	});
+	//takeaway logic...
+	if (
+		// old member had booster
+		oldMember.roles.cache.has(RoleIDs.NVOBooster) &&
+		// AND newMember does not have booster
+		!newMember.roles.cache.has(RoleIDs.NVOBooster) &&
+		// AND newMember does not have butterfly or higher
+		!hasHigherRole
+	) {
+		// if you lose the booster role, CHECK if you are a butterfly or better, and if NOT, takeaway the giveaway role
+		newMember.roles.remove(RoleIDs.NVOGiveAway);
 	}
 });
 
