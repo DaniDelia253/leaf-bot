@@ -44,7 +44,22 @@ const EmojiIDs = {
 	dizzy: "💫",
 };
 
-const plantedAtPhrases = ["planted at", "planted in", "plant at"];
+const plantedAtPhrases = [
+	"planted at",
+	"planted in",
+	"planted on",
+	"planted me",
+	"planted a",
+	"plant at",
+	"plant @",
+	"Planted at",
+	"Planted in",
+	"Planted on",
+	"Planted me",
+	"Planted a",
+	"Plant at",
+	"Plant @",
+];
 
 //*END of important stuff
 
@@ -157,7 +172,7 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 //look at every single message on the server...
-client.on("messageCreate", (message) => {
+client.on("messageCreate", async (message) => {
 	if (
 		message.author.username === "Arcane" &&
 		message.content.includes("has reached level")
@@ -232,14 +247,22 @@ client.on("messageCreate", (message) => {
 	}
 	//if the message is in the channel HeyIPleanted
 	if (message.channelId === ChannelIDs.NVOHeyIPlanted) {
-		let lowerCaseMessage = message.content.toLocaleLowerCase();
 		//and it includes "planted at/in"
 		plantedAtPhrases.forEach((phrase) => {
-			if (lowerCaseMessage.includes(phrase)) {
+			if (message.content.includes(phrase)) {
 				//then react with the dizzy emoji.
 				message.react(EmojiIDs.dizzy);
 			}
 		});
+	}
+	//if  "Infographics" says "Meditation" in "dailies" then leaf will send a reminder to "NotesChat" for "medi today!""
+	if (
+		message.author.id === UserIDs.NVOInfographicUserId &&
+		message.content.includes("Meditation") &&
+		message.channelId === ChannelIDs.NVODailies
+	) {
+		const channel = await client.channels.fetch(ChannelIDs.NVONotesChat);
+		channel.send("There's a medi quest today!");
 	}
 });
 
