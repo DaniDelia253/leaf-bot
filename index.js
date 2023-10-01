@@ -247,9 +247,10 @@ client.on("messageCreate", async (message) => {
 	}
 	//if the message is in the channel HeyIPleanted
 	if (message.channelId === ChannelIDs.NVOHeyIPlanted) {
+		let lowerCaseMessage = message.content.toLocaleLowerCase();
 		//and it includes "planted at/in"
 		plantedAtPhrases.forEach((phrase) => {
-			if (message.content.includes(phrase)) {
+			if (lowerCaseMessage.includes(phrase)) {
 				//then react with the dizzy emoji.
 				message.react(EmojiIDs.dizzy);
 			}
