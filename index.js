@@ -225,6 +225,33 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
 	}
 });
 
+client.on("guildMemberRemove", async (member) => {
+	// everything in here happens when someone leaves the server
+
+	// when someone leaves the server
+	//look for messages to delete:
+	// for now, the only message to delete is the button msg (message.content is an empty string, AND message.author.id == member(param).id)
+	//*completely done by dandan. wow shes so cool.     ........     ur mom
+	const channel = await client.channels.fetch(ChannelIDs.NVOwelcome);
+	await channel.messages.fetch().then((messages) => {
+		for (let message of messages) {
+			// here we are lookig at each individual message and deleting it if needed
+			// later, if we want to delete the leaf message or any other message concerning this person, we look for it and do that here as well :)
+			// todo later: calculate the amount of time since they joined (which we have access to) and delete the leaf message as well if it has been a short enough time???
+			//say bye bye to anyone who has been a member < 10 mins.
+			if (
+				// all the checks to see if I want to delete the message go here:
+				message[1].author.id === member.user.id &&
+				message[1].content === ""
+			) {
+				channel.messages
+					.fetch(message[1].id)
+					.then((messageToDelete) => messageToDelete.delete());
+			}
+		}
+	});
+});
+
 //look at every single message on the server...
 client.on("messageCreate", async (message) => {
 	if (
